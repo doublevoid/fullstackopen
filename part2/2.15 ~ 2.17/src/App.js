@@ -11,7 +11,7 @@ const App = () => {
   const [newSearch, setNewSearch] = useState('')
   const [filteredNumbers, setNewFilter] = useState([])
 
-  const baseUrl = 'http://localhost:3001/persons'
+  const baseUrl = '/api/persons'
 
   useEffect(() => {
     console.log('effect')
