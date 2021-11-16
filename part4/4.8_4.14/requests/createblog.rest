@@ -1,0 +1,9 @@
+POST http://localhost:3003/api/blogs/
+Content-Type: application/json
+
+{
+    "author": "null",
+    "title": "cube souls",
+    "url": "http://cubesouls.com",
+    "likes": 1000
+}
