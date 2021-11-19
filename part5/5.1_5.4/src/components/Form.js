@@ -6,6 +6,7 @@ const LoginForm = ({
     password,
     username,
     handleSignup,
+    setStatus
 }) => {
     let buttontext = 'login';
     if (handleSignup) {
@@ -33,7 +34,9 @@ const LoginForm = ({
                 />
             </div>
             <button type="submit">{buttontext}</button>
+            <button  onClick={() => setStatus('home')}>home</button>
         </form>
+        
     );
 };
 

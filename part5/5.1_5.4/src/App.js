@@ -82,10 +82,18 @@ const App = () => {
             setPassword('');
             setStatus('different');
         } catch (exception) {
-            setNotification(`${exception}`);
-            setTimeout(() => {
-                setNotification(null);
-            }, 5000);
+            console.log(exception);
+            if (exception.response.status == 401) {
+                setNotification('Error: wrong password or username');
+                setTimeout(() => {
+                    setNotification(null);
+                }, 5000);
+            } else {
+                setNotification(`${exception}`);
+                setTimeout(() => {
+                    setNotification(null);
+                }, 5000);
+            }
         }
     };
 
@@ -104,7 +112,15 @@ const App = () => {
             setPassword('');
             setStatus('home');
         } catch (exception) {
-            setNotification(`${exception}`);
+            let errorMessage = exception;
+            if(JSON.stringify(exception.response.data).includes('unique')){
+                errorMessage = 'Error: there\'s already an user with this name';
+            }
+            if(JSON.stringify(exception.response.data).includes('bigger than 3')){
+                errorMessage = 'Error: both the password and the username need to be bigger than 3';
+            }
+            console.log(exception.response.data);
+            setNotification(`${errorMessage}`);
             setTimeout(() => {
                 setNotification(null);
             }, 5000);
@@ -118,6 +134,7 @@ const App = () => {
             setPassword={(val) => setPassword(val)}
             password={password}
             username={username}
+            setStatus={(val) => setStatus(val)}
         />
     );
 
@@ -128,6 +145,7 @@ const App = () => {
             password={password}
             username={username}
             handleSignup={(val) => handleRegister(val)}
+            setStatus={(val) => setStatus(val)}
         />
     );
 
@@ -140,6 +158,7 @@ const App = () => {
             author={author}
             title={title}
             url={url}
+            
         />
     );
 
